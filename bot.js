@@ -30,10 +30,18 @@ client.on('message', message => {
             .then(function() {
                 message.reply('Connected to SSH!')
                 try {
-                    ssh.execCommand('ls').then(function(result) {
-                        console.log('STDOUT: ' + result.stdout)
-                        console.log('STDERR: ' + result.stderr)
+                    ssh.execCommand('./arma3server restart').then(function(result) {
+                        //console.log('STDOUT: ' + result.stdout)
+                        //console.log('STDERR: ' + result.stderr)
+                        const embededResponse = new Discord.MessageEmbed()
+                            .setColor('#5ef059')
+                            .setTitle('Arma 3 Server Restart')
+                            .setDescription(result.stdout)
+                            .setThumbnail('https://i.imgur.com/6fVQuBg.png')
+                            .setTimestamp()
+                        message.channel.send(embededResponse);
                     })
+                // message.reply("I have restarted the Arma 3 server!")
                 } catch {
                     message.reply('Command executing error!')
                 }
