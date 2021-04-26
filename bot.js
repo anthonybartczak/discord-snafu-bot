@@ -27,7 +27,22 @@ const createEmbed = function(color, title, description, thumbnail) {
 }
 
 client.on('message', message => {
-    if (message.content === '!A3restart') {
+    if (message.content === '!TFS help') {
+        const embedMessage = new Discord.MessageEmbed()
+            .setColor('#0099ff')
+            .setTitle('ChadBot help')
+            .setDescription('Displays all of the available ChadBot commands.')
+            .setThumbnail('https://i.imgur.com/6fVQuBg.png')
+            .addFields(
+                { name: '!TFS restart', value: 'Restarts the TFS Arma 3 server.' },
+            )
+            .setTimestamp()
+        }
+        message.channel.send(embedMessage)
+});
+
+client.on('message', message => {
+    if (message.content === '!TFS restart') {
         if (message.member.roles.cache.find(r => r.name === "Commander")){
             ssh.connect({
                 host: process.env.SERVER_IP,
@@ -46,16 +61,17 @@ client.on('message', message => {
                         const embededResponse = createEmbed('#5ef059', 'Arma 3 Server Restart', 'You server has been restarted succesfully!', 'https://i.imgur.com/6fVQuBg.png')
                         message.channel.send(embededResponse);
                     })
-                // message.reply("I have restarted the Arma 3 server!")
                 } catch {
-                    message.reply('Command executing error!')
+                    const embededResponse = createEmbed('#eb3434', 'Arma 3 Server Restart', 'There was an error while restarting the server!', 'https://i.imgur.com/6fVQuBg.png')
+                    message.channel.send(embededResponse);
                 }
             })
         } else {
-            message.reply('Access denied!')
+            const embededResponse = createEmbed('#eb3434', 'Arma 3 Server Restart', 'Permission denied! You need the Commander role to do this.', 'https://i.imgur.com/6fVQuBg.png')
+            message.channel.send(embededResponse);
         }
     }    
 });
 
 
-client.login(process.env.BOT_TOKEN); //BOT_TOKEN is the Client Secret
+client.login(process.env.BOT_TOKEN);
