@@ -28,7 +28,10 @@ client.on('message', message => {
                 tryKeyboard: true,
             })
             console.log("Connected to the SHH!")
-            ssh.execCommand("ls")
+            ssh.execCommand('ls').then(function(result) {
+                console.log('STDOUT: ' + result.stdout)
+                console.log('STDERR: ' + result.stderr)
+            })
         } else {
             message.reply('Access denied!')
         }
