@@ -27,15 +27,17 @@ client.on('message', message => {
                 password: process.env.SERVER_PASSWORD,
                 tryKeyboard: true,
             })
-            message.reply('Connected to SSH!')
-            try {
-                ssh.execCommand('ls').then(function(result) {
-                    console.log('STDOUT: ' + result.stdout)
-                    console.log('STDERR: ' + result.stderr)
-                })
-            } catch {
-                message.reply('Command executing error!')
-            }
+            .then(function() {
+                message.reply('Connected to SSH!')
+                try {
+                    ssh.execCommand('ls').then(function(result) {
+                        console.log('STDOUT: ' + result.stdout)
+                        console.log('STDERR: ' + result.stderr)
+                    })
+                } catch {
+                    message.reply('Command executing error!')
+                }
+            })
         } else {
             message.reply('Access denied!')
         }
@@ -43,4 +45,4 @@ client.on('message', message => {
 });
 
 
-client.login(process.env.BOT_TOKEN);//BOT_TOKEN is the Client Secret
+client.login(process.env.BOT_TOKEN); //BOT_TOKEN is the Client Secret
