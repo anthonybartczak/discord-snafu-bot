@@ -20,7 +20,12 @@ client.on('message', message => {
 client.on('message', message => {
     if (message.content === 'testing') {
         if (message.member.roles.cache.find(r => r.name === "Commander")){
-            message.reply('Access granted!');
+            ssh.connect({
+                host: process.env.SERVER_IP,
+                port: process.env.SERVER_PORT,
+                username: process.env.SERVER_USER,
+                password: process.env.SERVER_PASSWORD
+            })
         } else {
             message.reply('Access denied!')
         }
