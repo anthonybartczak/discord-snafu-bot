@@ -19,7 +19,7 @@ client.on('message', message => {
 
 client.on('message', message => {
     if (message.content === 'pytanie zarząd') {
-        if(message.member.roles.find(r => r.name === "Zarząd")){
+        if (message.member.roles.cache.some(role => role.name === 'Commander')){
             message.reply('odpowiedź zarząd');
         }
     }    
