@@ -19,7 +19,7 @@ client.on('message', message => {
 
 client.on('message', message => {
     if (message.content === 'testing') {
-        if (message.member.roles.cache.some(role => role.name === 'Commander')){
+        if (message.guild.roles.cache.find(roles => role.name === 'Commander')){
             message.reply('Access granted!');
         } else {
             message.reply('Access denied!')
