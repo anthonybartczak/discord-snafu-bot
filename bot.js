@@ -24,7 +24,8 @@ client.on('message', message => {
                 host: process.env.SERVER_IP,
                 port: process.env.SERVER_PORT,
                 username: process.env.SERVER_USER,
-                password: process.env.SERVER_PASSWORD
+                password: process.env.SERVER_PASSWORD,
+                tryKeyboard = true
             })
         } else {
             message.reply('Access denied!')
