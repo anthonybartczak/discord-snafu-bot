@@ -14,19 +14,18 @@ client.on('ready', () => {
 client.on('message', message => {
     if (message.content === 'ping') {
        message.reply('pong');
-       }    
+    }    
 });
 
 client.on('message', message => {
-    if (message.content === 'pytanie zarząd') {
+    if (message.content === 'testing') {
         if (message.member.roles.cache.some(role => role.name === 'Commander')){
-            message.reply('odpowiedź zarząd');
+            message.reply('Access granted!');
+        } else {
+            message.reply('Access denied!')
         }
     }    
 });
 
- 
-
-// THIS  MUST  BE  THIS  WAY
 
 client.login(process.env.BOT_TOKEN);//BOT_TOKEN is the Client Secret
