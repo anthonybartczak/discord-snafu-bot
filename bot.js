@@ -28,7 +28,7 @@ const createEmbed = function(color, title, description, thumbnail) {
 
 client.on('message', message => {
     if (message.content === '!TFS help') {
-        const embedMessage = new Discord.MessageEmbed()
+        const response = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle('ChadBot help')
             .setDescription('Displays all of the available ChadBot commands.')
@@ -37,8 +37,8 @@ client.on('message', message => {
                 { name: '!TFS restart', value: 'Restarts the TFS Arma 3 server.' },
             )
             .setTimestamp()
+        message.channel.send(response)
         }
-        message.channel.send(embedMessage)
 });
 
 client.on('message', message => {
