@@ -18,9 +18,9 @@ client.on('message', message => {
 });
 
 client.on('message', message => {
-    if (message.content === 'ping') {
+    if (message.content === 'pytanie zarząd') {
         if(message.member.roles.find(r => r.name === "Zarząd")){
-            message.reply('pong');
+            message.reply('odpowiedź zarząd');
         }
     }    
 });
