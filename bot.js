@@ -19,11 +19,12 @@ client.on('message', message => {
 
 client.on('message', message => {
     if (message.content === 'testing') {
-        if (message.member.roles.cache.find(r => r.name === "Commander")){
-            message.reply('Access granted!');
-        } else {
-            message.reply('Access denied!')
-        }
+        console.log(message.member)
+        // if (message.member.roles.cache.find(r => r.name === "Commander")){
+        //     message.reply('Access granted!');
+        // } else {
+        //     message.reply('Access denied!')
+        // }
     }    
 });
 
