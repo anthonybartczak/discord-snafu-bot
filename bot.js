@@ -27,11 +27,15 @@ client.on('message', message => {
                 password: process.env.SERVER_PASSWORD,
                 tryKeyboard: true,
             })
-            console.log("Connected to the SHH!")
-            ssh.execCommand('ls').then(function(result) {
-                console.log('STDOUT: ' + result.stdout)
-                console.log('STDERR: ' + result.stderr)
-            })
+            message.reply('Connected to SSH!')
+            try {
+                ssh.execCommand('ls').then(function(result) {
+                    console.log('STDOUT: ' + result.stdout)
+                    console.log('STDERR: ' + result.stderr)
+                })
+            } catch {
+                message.reply('Command executing error!')
+            }
         } else {
             message.reply('Access denied!')
         }
