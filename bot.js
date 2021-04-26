@@ -15,6 +15,17 @@ client.on('message', message => {
     }    
 });
 
+const createEmbed = function(color, title, description, thumbnail) {
+    const embedMessage = new Discord.MessageEmbed()
+        .setColor(color)
+        .setTitle(title)
+        .setDescription(description)
+        .setThumbnail(thumbnail)
+        .setTimestamp()
+
+    return embedMessage
+}
+
 client.on('message', message => {
     if (message.content === '!A3restart') {
         if (message.member.roles.cache.find(r => r.name === "Commander")){
@@ -32,12 +43,7 @@ client.on('message', message => {
                     ssh.execCommand('./arma3server restart').then(function(result) {
                         console.log('STDOUT: ' + result.stdout)
                         console.log('STDERR: ' + result.stderr)
-                        const embededResponse = new Discord.MessageEmbed()
-                            .setColor('#5ef059')
-                            .setTitle('Arma 3 Server Restart')
-                            .setDescription('You server has been restarted succesfully!')
-                            .setThumbnail('https://i.imgur.com/6fVQuBg.png')
-                            .setTimestamp()
+                        const embededResponse = createEmbed('#5ef059', 'Arma 3 Server Restart', 'You server has been restarted succesfully!', 'https://i.imgur.com/6fVQuBg.png')
                         message.channel.send(embededResponse);
                     })
                 // message.reply("I have restarted the Arma 3 server!")
