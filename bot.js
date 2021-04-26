@@ -27,6 +27,8 @@ client.on('message', message => {
                 password: process.env.SERVER_PASSWORD,
                 tryKeyboard: true,
             })
+            console.log("Connected to the SHH!")
+            ssh.execCommand("ls")
         } else {
             message.reply('Access denied!')
         }
