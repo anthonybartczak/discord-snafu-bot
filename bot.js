@@ -27,7 +27,7 @@ const createEmbed = function(color, title, description, thumbnail) {
 }
 
 client.on('message', message => {
-    if (message.content === '.pomoc') {
+    if (message.content === '.info') {
         const response = new Discord.MessageEmbed()
             .setColor('#0099ff')
             .setTitle('ChadBot help')
@@ -35,10 +35,12 @@ client.on('message', message => {
             .setThumbnail('https://i.imgur.com/6fVQuBg.png')
             .addFields(
                 { name: '.restart', value: 'Restarts the TFS Arma 3 server.' },
+                { name: '.start', value: 'Starts the TFS Arma 3 server.' },
+                { name: '.stop', value: 'Stop the TFS Arma 3 server.' },
             )
             .setTimestamp()
         message.channel.send(response)
-        }
+    }
 });
 
 client.on('message', message => {
@@ -58,7 +60,7 @@ client.on('message', message => {
                     ssh.execCommand('./arma3server restart').then(function(result) {
                         console.log('STDOUT: ' + result.stdout)
                         console.log('STDERR: ' + result.stderr)
-                        const embededResponse = createEmbed('#5ef059', 'Arma 3 Server Restart', 'You server has been restarted succesfully!', 'https://i.imgur.com/6fVQuBg.png')
+                        const embededResponse = createEmbed('#5ef059', 'Arma 3 Server Restart', 'Your server has been restarted succesfully!', 'https://i.imgur.com/6fVQuBg.png')
                         message.channel.send(embededResponse);
                     })
                 } catch {
@@ -90,7 +92,7 @@ client.on('message', message => {
                     ssh.execCommand('./arma3server stop').then(function(result) {
                         console.log('STDOUT: ' + result.stdout)
                         console.log('STDERR: ' + result.stderr)
-                        const embededResponse = createEmbed('#5ef059', 'Arma 3 Server Stop', 'You server has been stopped succesfully!', 'https://i.imgur.com/6fVQuBg.png')
+                        const embededResponse = createEmbed('#5ef059', 'Arma 3 Server Stop', 'Your server has been stopped succesfully!', 'https://i.imgur.com/6fVQuBg.png')
                         message.channel.send(embededResponse);
                     })
                 } catch {
@@ -122,7 +124,7 @@ client.on('message', message => {
                     ssh.execCommand('./arma3server start').then(function(result) {
                         console.log('STDOUT: ' + result.stdout)
                         console.log('STDERR: ' + result.stderr)
-                        const embededResponse = createEmbed('#5ef059', 'Arma 3 Server Start', 'You server has been started succesfully!', 'https://i.imgur.com/6fVQuBg.png')
+                        const embededResponse = createEmbed('#5ef059', 'Arma 3 Server Start', 'Your server has been started succesfully!', 'https://i.imgur.com/6fVQuBg.png')
                         message.channel.send(embededResponse);
                     })
                 } catch {
@@ -136,5 +138,36 @@ client.on('message', message => {
         }
     }    
 });
+
+
+
+// client.on('message', message => {
+//     if (message.content === '.start') {
+//         if (message.member.roles.cache.find(r => r.name === "Commander")){
+//             ssh.connect({
+//                 host: process.env.SERVER_IP,
+//                 port: process.env.SERVER_PORT,
+//                 username: process.env.SERVER_USER,
+//                 password: process.env.SERVER_PASSWORD,
+//                 tryKeyboard: true,
+//             })
+//             .then(function() {
+//                 var remoteDirectory = '/home/arma3server/serverfiles/mpmissions'
+//                 var localDirectory = 
+//                 message.channel.send('Connected to SSH...')
+//                 message.channel.send('')
+//                 ssh.putFile('/home/steel/Lab/localPath/fileName', '/home/steel/Lab/remotePath/fileName').then(function() {
+//                     console.log("The file transfer is done")
+//                   }, function(error) {
+//                     console.log("Something's wrong")
+//                     console.log(error)
+//                   })
+//             })
+//         } else {
+//             const embededResponse = createEmbed('#eb3434', 'Mission transfer', 'Permission denied! You need the Commander role to do this.', 'https://i.imgur.com/6fVQuBg.png')
+//             message.channel.send(embededResponse);
+//         }
+//     }    
+// });
 
 client.login(process.env.BOT_TOKEN);
